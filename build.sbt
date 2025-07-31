@@ -1,11 +1,9 @@
 ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
 ThisBuild / sonatypeRepository := "https://s01.oss.sonatype.org/service/local"
 ThisBuild / publishTo := {
-  val nexus = "https://s01.oss.sonatype.org/service/local"
-  if (isSnapshot.value)
-    Some("Sonatype OSS Snapshots" at nexus + "/content/repositories/snapshots")
-  else
-    Some("Sonatype OSS Releases"  at nexus + "/staging/deploy/maven2")
+  val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
+  if (isSnapshot.value) Some("central-snapshots" at centralSnapshots)
+  else localStaging.value
 }
 ThisBuild / publish / skip := true
 ThisBuild / scalafixDependencies ++= Seq(
